@@ -13,7 +13,7 @@ generate client SDKs in just about every exisitng language.
 Start by creating a .Net Core 3.1 Web API project.
 Next [install some nuget packages](https://docs.microsoft.com/en-us/nuget/quickstart/install-and-use-a-package-in-visual-studio).
 
-```
+``` csharp
 Install-Package Swashbuckle.AspNetCore
 Install-Package Microsoft.Extensions.DependencyInjection
 Install-Package Microsoft.AspNetCore.Builder
@@ -30,7 +30,7 @@ into a single class. This makes it easier to make adjustments
 to how swagger behaves. Create a class called SwaggerHelper
 and some using statements.
 
-```
+``` csharp
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.Swagger;
@@ -41,7 +41,7 @@ using Microsoft.AspNetCore.Builder;
 
 Next add three methods:
 
-```
+``` csharp
 public static void ConfigureSwaggerGen(SwaggerGenOptions swaggerGenOptions)
 {
 }
@@ -64,7 +64,7 @@ we'll ad two sectiosn of code. The fisrt configures the settings
 for Swagger, the second configures swagger for use with [JWT](https://jwt.io/) bearer
 tokens. (I usually configure it, even if I may not use it right away)
 
-```
+``` csharp
 swaggerGenOptions.SwaggerDoc("v1", new OpenApiInfo
 {
     Title = "nginx_ssl",
@@ -88,13 +88,13 @@ I just accept the default path. Then the final step in the `ConfigureSwaggerGen`
 is to make sure this xml documentation is included in swagger.
 Since we'll be dealing with files we'll need `System.IO` so we'll add a using statement:
 
-```
+``` csharp
 using System.IO;
 ```
 
 Then we add:
 
-```
+``` csharp
 string filePath = Path.Combine(AppContext.BaseDirectory, "WebApiwithSwashbuckle.xml");
 swaggerGenOptions.IncludeXmlComments(filePath);
 filePath = Path.Combine(AppContext.BaseDirectory, "WebAPISwashbuckle.Models.xml");
